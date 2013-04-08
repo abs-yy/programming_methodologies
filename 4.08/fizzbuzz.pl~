@@ -1,0 +1,18 @@
+#!/usr/env/bin perl
+use strict;
+use warnings;
+
+foreach ( 1..100 ) {
+  my $str = q{};
+  if( $_ % 3 == 0 ) {
+    $str .= "Fizz ";
+  }
+  elsif ( $_ % 5 == 0 ) {
+    $str .= "Buzz ";
+  }
+  else { 
+    $str.= $_;
+  }
+  $str .= "\n";
+  print $str;
+}
