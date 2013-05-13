@@ -1,0 +1,17 @@
+div#code {
+	margin-left:30px;
+	width:450px;
+    padding: 0px 1em;
+	background-color:lightgray;
+    border-radius: 10px;
+}
+div#footer{
+	text-align: right;
+	color:#adadad;
+}
+body{
+	padding: 10px 1em;
+}
+div{
+	margin-left:30px;
+}

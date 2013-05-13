@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>プログラミング方法論課題 : </title>
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <link rel="stylesheet" type="text/css" href="./change2al.css">
+
+
+<body>
+<h1>2013年度春学期プログラミング方法論</h1>
+<h2>課題2 : 状態遷移の文芸的プログラミング</h2>
+<br/>
+<h3>課題説明</h3>
+<div id="assignmen">
+<p>
+Rubyなどで使われる文字列表現をデータに配列に変換する状態遷移プログラムを<br/>
+文芸的プログラミングで記述して下さい。たとえば<br/>
+<br/>
+変換前文字列 ⇒ 変換後の配列データ<br/>
+”abc” ⇒ [0x61, 0x62, 0x63]<br/>
+”a\tb” ⇒ [0x61, 0x09, 0x62]<br/>
+”ab\n” ⇒ [0x61, 0x61, 0x0a]<br/>
+”\x1b\x00” ⇒ [0x1b, 0x00]<br/>
+”a\”b” ⇒ [0x61, 0x22, 0x62]<br/>
+<br/>
+のような変換を行ないます。<br/>
+<br/>
+* ひとつのHTML文書でプログラムとその処理を解説して下さい。<br/>
+* HTMLファイルからプログラムだけ抽出できる形式にして下さい。<br/>
+抽出プログラムを作成できることが明らかであれば抽出プログラムは作成しなくてもかまいません。<br/>
+* HTMLファイルをGitHubにアップロードし、そのURLをSFSに登録して下さい。<br/>
+</p>
+</div>
+
+<br/>
+<!-- 課題の説明-->
+<h3>実行プログラム</h3>
+<div id="explain">
+
+<p>Download <a href="change2al.pl.tar.gz">change2al.pl</a></p>
+
+</div>
+
+<!-- スクリプト -->
+<div id="code">
+  <pre><code>
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+change2al('abc');
+change2al("a\tc");
+change2al("ab\n");
+change2al("\x1b\x00");
+change2al("a\"b");
+
+sub &change2al {
+  my @query = split //, shift;
+  my @results;
+  foreach my $letter ( @query ) {
+    push @results , "0x".sprintf("%x", ord($letter));
+  }
+
+  my $result = "\"@query\""." => "."[ ";
+  foreach ( @results ) {
+    $result .= $_.", ";
+  }
+  print $result."]\n";
+}
+  </code></pre>
+</div>
+
+<br/>
+<h3>実行結果</h3>
+<div id="result">
+<pre><code>"a b c" => [ 0x61, 0x62, 0x63, ]
+"a   c" => [ 0x61, 0x9, 0x63, ]
+"a b
+" => [ 0x61, 0x62, 0xa, ]
+" " => [ 0x1b, 0x0, ]
+"a " b" => [ 0x61, 0x22, 0x62, ]
+</code></pre>
+</div>
+<h3>プログラムの説明</h3>
+<!-- スクリプトの説明 -->
+<div id="codeExplain"><br/>
+
+<p>perl言語を用いた文字コードの変換スクリプトです。<br/>&change2alというサブルーチンで変換操作を全て行っています。</p>
+<p>perlの関数のord()を用いることで、変換を行うことが出来るので、<br/>変換前文字列データを文字ごとに分割し、それぞれに対してord()を用いています(15行目)。<br/>後は出力として整形しています。</p>
+</div>
+
+<div id="footer">
+<p>2013.05.13@Programming Methodologies</p>
+</div>
+
+</body>
+</html>
